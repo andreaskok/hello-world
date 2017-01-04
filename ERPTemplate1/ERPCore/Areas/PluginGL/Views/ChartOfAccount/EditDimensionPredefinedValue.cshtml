@@ -1,0 +1,117 @@
+﻿@model ERPCore.Models.ViewDimensionValueModel
+
+<html>
+<head>
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(function () {
+        var clkBtn = "";
+        $('input[type="submit"]').click(function (evt) {
+            clkBtn = evt.target.id;
+            //alert('clkBtn=' + clkBtn);
+        });
+
+        $('#AssignForm').submit(function (button) {
+            var btnID = clkBtn;
+            //alert("form submitted; button id=" + btnID);
+            //alert("check=" + $(document.activeElement).val());
+            //var remove = $("#remove").val();
+            var add = "";
+            var remove = "";
+            var save = "";
+            var cancel = "";
+            if (btnID == "add")
+            {
+                add = "add";
+                remove = "";
+                save = "";
+                cancel = "";
+            }
+            else if (btnID == "remove")
+            {
+                add = "";
+                remove = "remove";
+                save = "";
+                cancel = "";
+            }
+            else if (btnID == "save") {
+                add = "";
+                remove = "";
+                save = "save";
+                cancel = "";
+            }
+            else if (btnID == "cancel") {
+                add = "";
+                remove = "";
+                save = "";
+                cancel = "cancel";
+            }
+            
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize() + "&add=" + add + "&remove=" + remove + "&save=" + save + "&cancel=" + cancel,
+                success: function (xhr) {
+                    $('#dialog-content').html(xhr);
+                    
+                    if (save != "" || cancel != "")
+                    {
+                        //alert("closing...");
+                        $("#dialog-assign").dialog('close');
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</head>
+<body>
+    
+    <div class="Centerize" id="dialog-content">
+    
+        @*@using (Html.BeginForm())*@
+        @*@using (Ajax.BeginForm("EditDimensionPredefinedValue", "ChartOfAccount", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultArea" }))*@
+        @using (Html.BeginForm("EditDimensionPredefinedValue", "ChartOfAccount", null, FormMethod.Post, new { @id = "AssignForm" }))
+        {
+            <div>
+                <table class="Centerize">
+                    <p style="font-size:12px; font-weight:bold; color:goldenrod; padding-left: 1em;">Dimension's Predefined Values</p>
+
+                    <thead>
+                        <tr>
+                            <th >Available</th>
+                            <th >&nbsp;</th>
+                            <th >Requested</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+                                @Html.ListBoxFor(model => model.AvailableSelected, new MultiSelectList(Model.AvailableDimensionValues, "DimensionValueID", "DimensionValue", Model.AvailableSelected), new { style = "width:270px;height:300px" })
+                            </td>
+                            <td valign="top">
+                                <input type="submit" name="add" id="add" value=">" /><br />
+                                <input type="submit" name="remove" id="remove" value="<" />
+                            </td>
+                            <td valign="top">
+                                @Html.ListBoxFor(model => model.RequestedSelected, new MultiSelectList(Model.RequestedDimensionValues, "DimensionValueID", "DimensionValue", Model.RequestedSelected), new { style = "width:270px;height:300px" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                @Html.HiddenFor(model => model.SavedRequested)
+
+            
+                <input type="submit" name="save" id="save" value="Save" />
+                <input type="submit" name="cancel" id="cancel" value="Cancel" />
+                @Html.ValidationSummary()
+            </div>
+        }
+
+        
+    </div>
+</body>
+</html>

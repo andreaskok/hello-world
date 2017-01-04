@@ -1,0 +1,137 @@
+﻿@model PagedList.IPagedList<ERPDomain.Entities.DynamicMenu>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<div id="dialog-alert" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit" style="display: none">
+</div>
+<div id="dialog-detail" style="display: none">
+</div>
+
+
+
+
+<body class="centerBorder">
+    <p>
+        <font style="font-size:14px; font-weight:bold; color:darkgreen;">Dynamic: Index</font><br><br>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </p>
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            <div class="Message">ViewBag.Message</div>
+        }
+        @if (ViewBag.DeleteMessage != null)
+        {
+            <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+        }
+    </div>
+
+
+    <table id="" border="0" cellspacing="5" cellpadding="5">
+        <tr>
+
+            @using (Html.BeginForm("Index", "DynamicMenu", FormMethod.Get))
+            {
+                <td>
+                    Search by Name: @Html.TextBox("SearchValue", ViewBag.CurrentFilter as string)
+                    <input type="submit" value="Filter" />
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Export to Excel", "Export2Excel", null, null)
+            </td>
+
+        </tr>
+    </table>
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.UserID)*@
+                @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy = "ID" })
+            </th>
+            <th>
+                @Html.ActionLink("Parent ID", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy="ParentID" })
+            </th>
+            <th>
+                @Html.ActionLink("Menu Level", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy = "MenuLevel" })
+            </th>
+            <th>
+                @Html.ActionLink("Menu Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy = "MenuName" })
+            </th>
+            <th>
+                @Html.ActionLink("Controller Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy = "ControllerName" })
+            </th>
+            <th>
+                @Html.ActionLink("Method Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy = "MethodName" })
+            </th>
+            <th>
+                @Html.ActionLink("Area Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, sortBy = "AreaName" })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MenuLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MenuName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ControllerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MethodName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AreaName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "lnkEdit btn btn-primary" }) 
+                    @*@Html.ActionLink("Details", "Details2", new { id = item.ID }, new { @class = "lnkDetail" }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "lnkDelete btn btn-warning" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+
+
+
+</body>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+

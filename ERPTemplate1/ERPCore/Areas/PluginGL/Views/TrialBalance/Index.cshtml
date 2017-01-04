@@ -1,0 +1,14 @@
+﻿
+@using MvcReportViewer
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.MvcReportViewer(
+    "/Prototype/TrialBalance",
+    new { Year = "2016", Month = "8"},
+    new { Height = 900, Width = 900, style = "border: none" })
+
+@*@Html.MvcReportViewer("/Prototype/TrialBalance", "2016", "5")*@
+

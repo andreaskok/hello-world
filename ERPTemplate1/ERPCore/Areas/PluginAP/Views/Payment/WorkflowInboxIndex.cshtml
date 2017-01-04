@@ -1,0 +1,92 @@
+﻿@*@model IEnumerable<ERPDomain.Entities.Payment>*@
+@model PagedList.IPagedList<ERPDomain.Entities.Payment>
+@using PagedList.Mvc;
+
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<div id="dialog-alert" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit" style="display: none">
+</div>
+<div id="dialog-detail" style="display: none">
+</div>
+
+<div id="dialog-workflowsubmit" style="display: none">
+</div>
+
+@{
+    ViewBag.Title = "Workflow Inbox";
+}
+
+<h2>Workflow Inbox</h2>
+<body class="centerBorder">
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            <div class="Message">ViewBag.Message</div>
+        }
+        @if (ViewBag.DeleteMessage != null)
+        {
+            <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+        }
+    </div>
+
+
+    @using (Html.BeginForm("Index", "Payment", FormMethod.Get))
+    {
+        <p>
+            Search by Payment Code: @Html.TextBox("SearchValue", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Filter" />
+        </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("PaymentCode", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("VendorCode", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            @*<th>
+                    @Html.ActionLink("PaymentType", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>*@
+            <th>
+                @Html.ActionLink("BankCode", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Remark", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            Html.RenderAction("LoadPaymentForApproval", "Payment", new { paymentId = item.ID });
+
+            
+
+        }
+
+    </table>
+</body>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

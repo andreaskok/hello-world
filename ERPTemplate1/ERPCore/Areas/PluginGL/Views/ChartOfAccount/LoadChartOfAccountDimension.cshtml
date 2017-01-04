@@ -1,0 +1,63 @@
+﻿@model List<ERPCore.Models.DimensionModel>
+
+<script src="~/Scripts/popupuiassignlist.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+<div id="dialog-assign" style="display: none">
+</div>
+
+
+@*<p>
+    @Html.ActionLink("Create New", "CreateChartOfAccountDimension", null, new { id = "lnkCreate2" })
+</p>*@
+
+@using (Html.BeginForm("LoadChartOfAccountDimension", "ChartOfAccount"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DimensionCode)*@
+                DimensionCode
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DimensionValue)*@
+                DimensionValue
+            </th>
+              <th></th>
+        </tr>
+
+        @*@foreach (var item in Model)*@
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => Model[i].DimensionTableRelationshipID)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].DimensionCode)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "EditDimensionPredefinedValue", new { dimensionSettingId = Model[i].DimensionSettingID }, new { @class = "lnkAssign" })
+                </td>
+                @*<td>
+                    @Html.TextBoxFor(modelItem => Model[i].DimensionValue)
+                </td>
+                 <td>
+                    @Html.ActionLink("Delete", "DeleteChartOfAccountDimension", new { AccId = Model[i].ChartOfAccountID, DimId = Model[i].ID }, new { @class = "lnkDelete2" })
+                </td>*@
+            </tr>
+        }
+
+
+    </table>
+
+    @*<div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>*@
+    <br />
+
+}
+

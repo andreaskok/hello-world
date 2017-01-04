@@ -1,0 +1,289 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+DIV.Message { 
+    /*background: gray; color:White; padding: .2em; margin-top:.25em;*/ 
+    font-family: Times New Roman, serif;
+    font-style: oblique;
+    font-size: 12px;
+    color: Navy;
+    text-align: center;
+} 
+
+DIV.DeleteMessage { 
+    /*background: gray; color:White; padding: .2em; margin-top:.25em;*/ 
+    font-family: Times New Roman, serif;
+    font-style: oblique;
+    font-size: 12px;
+    color: Red;
+    text-align: center;
+} 
+
+DIV.WarningMessage { 
+    /*background: gray; color:White; padding: .2em; margin-top:.25em;*/ 
+    font-family: Times New Roman, serif;
+    font-style: oblique;
+    font-size: 14px;
+    color: Red;
+    text-align: center;
+    font-weight: bold;
+} 
+
+DIV.ErrorMessage { 
+    /*background: gray; color:White; padding: .2em; margin-top:.25em;*/ 
+    font-family: Times New Roman, serif;
+    font-style: oblique;
+    font-size: 14px;
+    color: Red;
+    text-align: center;
+    font-weight: bold;
+} 
+
+DIV.Centerize {
+    margin: auto;
+    width: 90%;
+    border: 0px solid #73AD21;
+    padding: 2px;
+    border-radius: 1%;
+}
+
+TABLE.Centerize {
+    margin: auto;
+    width: 90%;
+    border: 0px solid #73AD21;
+    padding: 2px;
+    border-radius: 10%;
+}
+
+a.LinkButton
+{
+    /*background: url(../Images/image.gif) no-repeat top left;*/
+     display: block;
+     width: 150px;
+     height: 150px;
+     text-indent: -9999px; /* hides the link text */
+}
+
+#nav2 ul{
+    display : none;
+}
+#nav2 li:hover > ul{
+    display : block;
+}
+
+.navbar {
+    background-color: #34495e; 
+}
+
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 11px;
+  list-style: none;
+  background-color: #aeb6bf;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+}
+
+
+h1,
+.h1 {
+  font-size: 26px;
+}
+
+h2,
+.h2 {
+  font-size: 20px;
+}
+
+h3,
+.h3 {
+  font-size: 14px;
+}
+
+h4,
+.h4 {
+  font-size: 8px;
+}
+
+h5,
+.h5 {
+  font-size: 4px;
+}
+
+h6,
+.h6 {
+  font-size: 2px;
+}
+
+h7,
+.h7 {
+  font-size: 12px;
+  border-bottom: 1px solid #eeeeee;
+
+}
+
+.TextBoxFor800
+{
+    width: 800px;
+    border-radius: 5px;
+    padding-top: 7px;
+    /*padding-top: 1em;
+    padding-bottom: 1em;*/
+    /*font-family:Arial, Helvetica, sans-serif;
+    font-size: 1.00em;*/
+}
+
+/*.centerBorder {
+    margin: 80px 80px 80px 100px;
+    width: 90%;
+    border: 5px solid AliceBlue;
+    border-radius: 10px;
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    background-color: #D5F5E3;
+}
+
+html { background-color: white; }
+body centerBorder { background-color: #D5F5E3; }
+
+.clearfix{
+    clear: both;
+    padding: 0;
+    margin: 0;
+    height: 5px;
+    display: block;}*/
+
+.zoomInBorder {
+    margin: 50px 10px 10px 20px;
+    width: 99%;
+    border: 1px solid AliceBlue;
+    border-radius: 10px;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    /*background-color: #D5F5E3;*/
+}
+
+.centerBorder {
+    margin: 5px 5px 5px 5px;
+    width: 99%;
+    border: 5px solid AliceBlue;
+    border-radius: 10px;
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    background-color: #D5F5E3;
+}
+
+html { background-color: white; }
+DIV centerBorder { background-color: #D5F5E3; }
+
+.centerBorder2 {
+    margin: 5px 5px 5px 5px;
+    width: 99%;
+    border: 5px solid AliceBlue;
+    border-radius: 10px;
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+.clearfix{
+    clear: both;
+    padding: 0;
+    margin: 0;
+    height: 5px;
+    display: block;}
+
+DIV#categories { float: left; width: 11em; padding: .3em; }
+DIV#categories A  
+{
+    font: bold 1.1em "Arial Narrow","Franklin Gothic Medium",Arial; display: block;
+    text-decoration: none; padding: .6em; color: #E55010;
+    border-bottom: 1px solid silver;
+    
+}
+DIV#categories A.selected { background-color: #666; color: White; }
+DIV#categories A:hover { background-color: #CCC; }
+DIV#categories A.selected:hover { background-color: #666; }
+
+
+.excelTable{
+  border-collapse: collapse;
+  border-spacing: 0;
+  border:0;
+  padding: 0;
+  margin:0;
+
+  
+  /*border="0" cellspacing="0" cellpadding="0"*/
+}
+
+#topPanelContainer div{
+    display:inline-block;
+    width:500px;
+    height: 300px;
+    background-color: red;
+    border: 3px solid red;
+    border-top: 5px solid #dddddd;
+    padding-bottom: 15em;
+    margin-bottom: 50px;
+}
+
+.panel {
+    margin-bottom: 10px;
+    
+}
+
+.panel-default{
+    background-color:#D5F5E3;
+}
+
+
+
+
+

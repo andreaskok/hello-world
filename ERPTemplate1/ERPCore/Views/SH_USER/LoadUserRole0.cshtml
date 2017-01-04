@@ -1,0 +1,55 @@
+﻿@model List<ERPDomain.Entities.SH_USERROLE>
+
+
+@using (Html.BeginForm("LoadUserRole", "SH_USER"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.SH_ROLE.RoleName)*@
+                Role
+            </th>
+            <th>
+                Assign
+            </th>
+
+            <th></th>
+            <th></th>
+        </tr>
+
+        @*@foreach (var item in Model)*@
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => Model[i].ID)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].SH_ROLE.RoleName)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].Assign)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "DeleteUserRole", new { userId = Model[i].SH_USERID, userRoleId = Model[i].ID }, new { @class = "lnkDelete2" })
+                </td>
+                <td>
+                    @Html.ActionLink("View Role Access", "ViewRoleAccess", new { roleId = Model[i].SH_ROLEID }, new { @class = "lnkDetail2" })
+                </td>
+            </tr>
+        }
+
+
+
+    </table>
+
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+    <br />
+
+}

@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6758F859-E4D3-4262-8F13-12A582E0BCDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ERPDomain</RootNamespace>
+    <AssemblyName>ERPDomain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\..\packages\Dapper.1.50.0\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentMigrator">
+      <HintPath>..\..\packages\FluentMigrator.1.6.2\lib\40\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner">
+      <HintPath>..\..\packages\FluentMigrator.Runner.1.6.2\lib\40\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\IAccountGroupRepository.cs" />
+    <Compile Include="Abstract\IActivityGroupRepository.cs" />
+    <Compile Include="Abstract\IBranchRepository.cs" />
+    <Compile Include="Abstract\ICalendarRepository.cs" />
+    <Compile Include="Abstract\IChartOfAccountRepository.cs" />
+    <Compile Include="Abstract\IChartOfAccount_DimensionValueRepository.cs" />
+    <Compile Include="Abstract\IChartOfAccount_Dim_SetupRepository.cs" />
+    <Compile Include="Abstract\IChartOfAccount_Dim_ValueRepository.cs" />
+    <Compile Include="Abstract\ICountryRepository.cs" />
+    <Compile Include="Abstract\ICountryStateRepository.cs" />
+    <Compile Include="Abstract\ICreditNoteLineRepository.cs" />
+    <Compile Include="Abstract\ICreditNoteRepository.cs" />
+    <Compile Include="Abstract\ICurrencyExchangeRateRepository.cs" />
+    <Compile Include="Abstract\ICurrencyRepository.cs" />
+    <Compile Include="Abstract\ICustomerRepository.cs" />
+    <Compile Include="Abstract\ICustomer_Dim_SetupRepository.cs" />
+    <Compile Include="Abstract\ICustomer_Dim_ValueRepository.cs" />
+    <Compile Include="Abstract\IDebitNoteLineRepository.cs" />
+    <Compile Include="Abstract\IDebitNoteRepository.cs" />
+    <Compile Include="Abstract\IDebugLogRepository.cs" />
+    <Compile Include="Abstract\IDfAppliedModuleRepository.cs" />
+    <Compile Include="Abstract\IDfExemptItemRepository.cs" />
+    <Compile Include="Abstract\IDfItemTypeRepository.cs" />
+    <Compile Include="Abstract\IDfMasterDataRepository.cs" />
+    <Compile Include="Abstract\IDfMasterRepository.cs" />
+    <Compile Include="Abstract\IDfRequestDataRepository.cs" />
+    <Compile Include="Abstract\IDfRequestRepository.cs" />
+    <Compile Include="Abstract\IDimensionSetupRepository.cs" />
+    <Compile Include="Abstract\IDimension_SettingRepository.cs" />
+    <Compile Include="Abstract\IDimension_TableRelationshipRepository.cs" />
+    <Compile Include="Abstract\IDimension_ValueRepository.cs" />
+    <Compile Include="Abstract\IDynamicMenuRepository.cs" />
+    <Compile Include="Abstract\IEmployeeRepository.cs" />
+    <Compile Include="Abstract\IErrorLogRepository.cs" />
+    <Compile Include="Abstract\IInvoiceLineRepository.cs" />
+    <Compile Include="Abstract\IInvoiceRepository.cs" />
+    <Compile Include="Abstract\IJobScheduleRepository.cs" />
+    <Compile Include="Abstract\IJournalLineRepository.cs" />
+    <Compile Include="Abstract\IJournalRepository.cs" />
+    <Compile Include="Abstract\ILanguageRepository.cs" />
+    <Compile Include="Abstract\IMonthEndTransactionRepository.cs" />
+    <Compile Include="Abstract\IOrganizationRepository.cs" />
+    <Compile Include="Abstract\IParentMenuRepository.cs" />
+    <Compile Include="Abstract\IPaymentLineRepository.cs" />
+    <Compile Include="Abstract\IPaymentRepository.cs" />
+    <Compile Include="Abstract\IPluginAreaRepository.cs" />
+    <Compile Include="Abstract\ISH_APPRepository.cs" />
+    <Compile Include="Abstract\ISH_ROLEACCESSRepository.cs" />
+    <Compile Include="Abstract\ISH_ROLEMEMBERRepository.cs" />
+    <Compile Include="Abstract\ISH_ROLERepository.cs" />
+    <Compile Include="Abstract\ISH_USERRepository.cs" />
+    <Compile Include="Abstract\ISH_USERROLERepository.cs" />
+    <Compile Include="Abstract\ISubMenuRepository.cs" />
+    <Compile Include="Abstract\IUserPreferenceRepository.cs" />
+    <Compile Include="Abstract\IVendorRepository.cs" />
+    <Compile Include="Abstract\IWfActionRepository.cs" />
+    <Compile Include="Abstract\IWfActionTargetRepository.cs" />
+    <Compile Include="Abstract\IWfActionTypeRepository.cs" />
+    <Compile Include="Abstract\IWfActivityRepository.cs" />
+    <Compile Include="Abstract\IWfActivityTargetRepository.cs" />
+    <Compile Include="Abstract\IWfActivityTypeRepository.cs" />
+    <Compile Include="Abstract\IWfEscalationRepository.cs" />
+    <Compile Include="Abstract\IWfGroupMemberRepository.cs" />
+    <Compile Include="Abstract\IWfGroupRepository.cs" />
+    <Compile Include="Abstract\IWfProcessAdminRepository.cs" />
+    <Compile Include="Abstract\IWfProcessRepository.cs" />
+    <Compile Include="Abstract\IWfRequestActionRepository.cs" />
+    <Compile Include="Abstract\IWfRequestDataRepository.cs" />
+    <Compile Include="Abstract\IWfRequestFileRepository.cs" />
+    <Compile Include="Abstract\IWfRequestNoteRepository.cs" />
+    <Compile Include="Abstract\IWfRequestRepository.cs" />
+    <Compile Include="Abstract\IWfRequestStakeholderRepository.cs" />
+    <Compile Include="Abstract\IWfStateActivityRepository.cs" />
+    <Compile Include="Abstract\IWfStateRepository.cs" />
+    <Compile Include="Abstract\IWfStateTypeRepository.cs" />
+    <Compile Include="Abstract\IWfTargetRepository.cs" />
+    <Compile Include="Abstract\IWfTransitionActionRepository.cs" />
+    <Compile Include="Abstract\IWfTransitionActivityRepository.cs" />
+    <Compile Include="Abstract\IWfTransitionRepository.cs" />
+    <Compile Include="Abstract\lActivityRepository.cs" />
+    <Compile Include="Abstract\lActivitySubRepository.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Concrete\EFDfAppliedModuleRepository.cs" />
+    <Compile Include="Concrete\EFDfExemptItemRepository.cs" />
+    <Compile Include="Concrete\EFDfItemTypeRepository.cs" />
+    <Compile Include="Concrete\EFDfMasterDataRepository.cs" />
+    <Compile Include="Concrete\EFDfMasterRepository.cs" />
+    <Compile Include="Concrete\EFAccountGroupRepository.cs" />
+    <Compile Include="Concrete\EFActivityGroupRepository.cs" />
+    <Compile Include="Concrete\EFActivityRepository.cs" />
+    <Compile Include="Concrete\EFActivitySubRepository.cs" />
+    <Compile Include="Concrete\EFBranchRepository.cs" />
+    <Compile Include="Concrete\EFCalendarRepository.cs" />
+    <Compile Include="Concrete\EFChartOfAccountRepository.cs" />
+    <Compile Include="Concrete\EFChartOfAccount_DimensionValueRepository.cs" />
+    <Compile Include="Concrete\EFChartOfAccount_Dim_SetupRepository.cs" />
+    <Compile Include="Concrete\EFChartOfAccount_Dim_ValueRepository.cs" />
+    <Compile Include="Concrete\EFCountryRepository.cs" />
+    <Compile Include="Concrete\EFCountryStateRepository.cs" />
+    <Compile Include="Concrete\EFCreditNoteLineRepository.cs" />
+    <Compile Include="Concrete\EFCreditNoteRepository.cs" />
+    <Compile Include="Concrete\EFCurrencyExchangeRateRepository.cs" />
+    <Compile Include="Concrete\EFCurrencyRepository.cs" />
+    <Compile Include="Concrete\EFCustomerRepository.cs" />
+    <Compile Include="Concrete\EFCustomer_Dim_SetupRepository.cs" />
+    <Compile Include="Concrete\EFCustomer_Dim_ValueRepository.cs" />
+    <Compile Include="Concrete\EFDbContext.cs" />
+    <Compile Include="Concrete\EFDbContext2.cs" />
+    <Compile Include="Concrete\EFDbContextAP.cs" />
+    <Compile Include="Concrete\EFDbContextAR.cs" />
+    <Compile Include="Concrete\EFDbContextGL.cs" />
+    <Compile Include="Concrete\EFDbContextWorkflow.cs" />
+    <Compile Include="Concrete\EFDebitNoteLineRepository.cs" />
+    <Compile Include="Concrete\EFDebitNoteRepository.cs" />
+    <Compile Include="Concrete\EFDebugLogRepository.cs" />
+    <Compile Include="Concrete\EFDfRequestDataRepository.cs" />
+    <Compile Include="Concrete\EFDfRequestRepository.cs" />
+    <Compile Include="Concrete\EFDimensionSetupRepository.cs" />
+    <Compile Include="Concrete\EFDimension_SettingRepository.cs" />
+    <Compile Include="Concrete\EFDimension_TableRelationshipRepository.cs" />
+    <Compile Include="Concrete\EFDimension_ValueRepository.cs" />
+    <Compile Include="Concrete\EFDynamicMenuRepository.cs" />
+    <Compile Include="Concrete\EFEmployeeRepository.cs" />
+    <Compile Include="Concrete\EFErrorLogRepository.cs" />
+    <Compile Include="Concrete\EFInvoiceLineRepository.cs" />
+    <Compile Include="Concrete\EFInvoiceRepository.cs" />
+    <Compile Include="Concrete\EFJobScheduleRepository.cs" />
+    <Compile Include="Concrete\EFJournalLineRepository.cs" />
+    <Compile Include="Concrete\EFJournalRepository.cs" />
+    <Compile Include="Concrete\EFLanguageRepository.cs" />
+    <Compile Include="Concrete\EFMonthEndTransactionRepository.cs" />
+    <Compile Include="Concrete\EFOrganizationRepository.cs" />
+    <Compile Include="Concrete\EFParentMenuRepository.cs" />
+    <Compile Include="Concrete\EFPaymentLineRepository.cs" />
+    <Compile Include="Concrete\EFPaymentRepository.cs" />
+    <Compile Include="Concrete\EFPluginAreaRepository.cs" />
+    <Compile Include="Concrete\EFSH_APPRepository.cs" />
+    <Compile Include="Concrete\EFSH_ROLEACCESSRepository.cs" />
+    <Compile Include="Concrete\EFSH_ROLEMEMBERRepository.cs" />
+    <Compile Include="Concrete\EFSH_ROLERepository.cs" />
+    <Compile Include="Concrete\EFSH_USERRepository.cs" />
+    <Compile Include="Concrete\EFSH_USERROLERepository.cs" />
+    <Compile Include="Concrete\EFSubMenuRepository.cs" />
+    <Compile Include="Concrete\EFUserPreferenceRepository.cs" />
+    <Compile Include="Concrete\EFVendorRepository.cs" />
+    <Compile Include="Concrete\EFWfActionRepository.cs" />
+    <Compile Include="Concrete\EFWfActionTargetRepository.cs" />
+    <Compile Include="Concrete\EFWfActionTypeRepository.cs" />
+    <Compile Include="Concrete\EFWfActivityRepository.cs" />
+    <Compile Include="Concrete\EFWfActivityTargetRepository.cs" />
+    <Compile Include="Concrete\EFWfActivityTypeRepository.cs" />
+    <Compile Include="Concrete\EFWfEscalationRepository.cs" />
+    <Compile Include="Concrete\EFWfGroupMemberRepository.cs" />
+    <Compile Include="Concrete\EFWfGroupRepository.cs" />
+    <Compile Include="Concrete\EFWfProcessAdminRepository.cs" />
+    <Compile Include="Concrete\EFWfProcessRepository.cs" />
+    <Compile Include="Concrete\EFWfRequestActionRepository.cs" />
+    <Compile Include="Concrete\EFWfRequestDataRepository.cs" />
+    <Compile Include="Concrete\EFWfRequestFileRepository.cs" />
+    <Compile Include="Concrete\EFWfRequestNoteRepository.cs" />
+    <Compile Include="Concrete\EFWfRequestRepository.cs" />
+    <Compile Include="Concrete\EFWfRequestStakeholderRepository.cs" />
+    <Compile Include="Concrete\EFWfStateActivityRepository.cs" />
+    <Compile Include="Concrete\EFWfStateRepository.cs" />
+    <Compile Include="Concrete\EFWfStateTypeRepository.cs" />
+    <Compile Include="Concrete\EFWfTargetRepository.cs" />
+    <Compile Include="Concrete\EFWfTransitionActionRepository.cs" />
+    <Compile Include="Concrete\EFWfTransitionActivityRepository.cs" />
+    <Compile Include="Concrete\EFWfTransitionRepository.cs" />
+    <Compile Include="Entities\AccountGroup.cs" />
+    <Compile Include="Entities\Activity.cs" />
+    <Compile Include="Entities\ActivityGroup.cs" />
+    <Compile Include="Entities\ActivitySub.cs" />
+    <Compile Include="Entities\Branch.cs" />
+    <Compile Include="Entities\Calendar.cs" />
+    <Compile Include="Entities\ChartOfAccount.cs" />
+    <Compile Include="Entities\ChartOfAccount_DimensionValue.cs" />
+    <Compile Include="Entities\ChartOfAccount_Dim_Setup.cs" />
+    <Compile Include="Entities\ChartOfAccount_Dim_Value.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\CountryState.cs" />
+    <Compile Include="Entities\CreditNote.cs" />
+    <Compile Include="Entities\CreditNoteLine.cs" />
+    <Compile Include="Entities\Currency.cs" />
+    <Compile Include="Entities\CurrencyExchangeRate.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\Customer_Dim_Setup.cs" />
+    <Compile Include="Entities\Customer_Dim_Value.cs" />
+    <Compile Include="Entities\DebitNote.cs" />
+    <Compile Include="Entities\DebitNoteLine.cs" />
+    <Compile Include="Entities\DebugLog.cs" />
+    <Compile Include="Entities\DfAppliedModule.cs" />
+    <Compile Include="Entities\DfExemptItem.cs" />
+    <Compile Include="Entities\DfItemType.cs" />
+    <Compile Include="Entities\DfMaster.cs" />
+    <Compile Include="Entities\DfMasterData.cs" />
+    <Compile Include="Entities\DfRequest.cs" />
+    <Compile Include="Entities\DfRequestData.cs" />
+    <Compile Include="Entities\DimensionSetup.cs" />
+    <Compile Include="Entities\Dimension_Setting.cs" />
+    <Compile Include="Entities\Dimension_TableRelationship.cs" />
+    <Compile Include="Entities\Dimension_Value.cs" />
+    <Compile Include="Entities\DynamicMenu.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\ErrorLog.cs" />
+    <Compile Include="Entities\Invoice.cs" />
+    <Compile Include="Entities\InvoiceLine.cs" />
+    <Compile Include="Entities\JobSchedule.cs" />
+    <Compile Include="Entities\Journal.cs" />
+    <Compile Include="Entities\JournalLine.cs" />
+    <Compile Include="Entities\Language.cs" />
+    <Compile Include="Entities\MonthEndTransaction.cs" />
+    <Compile Include="Entities\Organization.cs" />
+    <Compile Include="Entities\ParentMenu.cs" />
+    <Compile Include="Entities\Payment.cs" />
+    <Compile Include="Entities\PaymentLine.cs" />
+    <Compile Include="Entities\PluginArea.cs" />
+    <Compile Include="Entities\SH_APP.cs" />
+    <Compile Include="Entities\SH_ROLE.cs" />
+    <Compile Include="Entities\SH_ROLEACCESS.cs" />
+    <Compile Include="Entities\SH_ROLEMEMBER.cs" />
+    <Compile Include="Entities\SH_USER.cs" />
+    <Compile Include="Entities\SH_USERROLE.cs" />
+    <Compile Include="Entities\SubMenu.cs" />
+    <Compile Include="Entities\UserPreference.cs" />
+    <Compile Include="Entities\Vendor.cs" />
+    <Compile Include="Entities\WfAction.cs" />
+    <Compile Include="Entities\WfActionTarget.cs" />
+    <Compile Include="Entities\WfActionType.cs" />
+    <Compile Include="Entities\WfActivity.cs" />
+    <Compile Include="Entities\WfActivityTarget.cs" />
+    <Compile Include="Entities\WfActivityType.cs" />
+    <Compile Include="Entities\WfEscalation.cs" />
+    <Compile Include="Entities\WfGroup.cs" />
+    <Compile Include="Entities\WfGroupMember.cs" />
+    <Compile Include="Entities\WfProcess.cs" />
+    <Compile Include="Entities\WfProcessAdmin.cs" />
+    <Compile Include="Entities\WfRequest.cs" />
+    <Compile Include="Entities\WfRequestAction.cs" />
+    <Compile Include="Entities\WfRequestData.cs" />
+    <Compile Include="Entities\WfRequestFile.cs" />
+    <Compile Include="Entities\WfRequestNote.cs" />
+    <Compile Include="Entities\WfRequestStakeholder.cs" />
+    <Compile Include="Entities\WfState.cs" />
+    <Compile Include="Entities\WfStateActivity.cs" />
+    <Compile Include="Entities\WfStateType.cs" />
+    <Compile Include="Entities\WfTarget.cs" />
+    <Compile Include="Entities\WfTransition.cs" />
+    <Compile Include="Entities\WfTransitionAction.cs" />
+    <Compile Include="Entities\WfTransitionActivity.cs" />
+    <Compile Include="Helpers\CommonUtility.cs" />
+    <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Logs\ERPLog.cs" />
+    <Compile Include="Models\CountryStateModel.cs" />
+    <Compile Include="Models\CreditNoteLineModel.cs" />
+    <Compile Include="Models\CustomerDimensionRelationshipModel.cs" />
+    <Compile Include="Models\DebitNoteLineModel.cs" />
+    <Compile Include="Models\DebugLogModel.cs" />
+    <Compile Include="Models\DimensionSettingModel.cs" />
+    <Compile Include="Models\DynamicMenuModel.cs" />
+    <Compile Include="Models\InvoiceLineModel.cs" />
+    <Compile Include="Models\JournalLineModel.cs" />
+    <Compile Include="Models\MonthEndPostingModel.cs" />
+    <Compile Include="Models\OrganizationBranchModel.cs" />
+    <Compile Include="Models\PaymentLineModel.cs" />
+    <Compile Include="Models\ResourceModel.cs" />
+    <Compile Include="Models\RoleAccessModel.cs" />
+    <Compile Include="Models\SystemSettingModel.cs" />
+    <Compile Include="Models\UserRoleModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\WorkflowPaymentModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

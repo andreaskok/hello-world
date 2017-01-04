@@ -1,0 +1,79 @@
+﻿@using ERPDomain.Entities
+@model IEnumerable<ParentMenu>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+
+        <li>@Html.ActionLink(Resources.Home, "Index", "Home")</li>
+        
+        @if (Session["UserEmail"] != null && (String)Session["UserEmail"] != "")
+        {
+            //foreach (var menu in Model)
+            //{
+            if (Session["AdminFlag"].ToString() == "True")
+            {
+                    @*<li>@Html.ActionLink(Resources.Admin, menu.MethodName, menu.ControllerName, new { Area = menu.Area }, null)</li>*@
+                    <li class="dropdown">
+                    
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.Admin<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                            <li>@Html.ActionLink(Resources.UserSetup, "Index", "SH_USER", null, null)</li>
+                            <li>@Html.ActionLink(Resources.RoleSetup, "Index", "SH_ROLE", null, null)</li>
+                            <li>@Html.ActionLink("Employee", "Index", "Employee", null, null)</li>
+                            @*<li class="dropdown-submenu">
+                                @Html.ActionLink(Resources.AppSetup, "Index", "SH_APP", new { Area = menu.Area }, null)
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Sub Menu 1</a></li>
+                                    <li><a href="#">Sub Menu 2</a></li>
+                                </ul>
+                            </li>*@
+                            <li class="dropdown-submenu">
+                                @Html.ActionLink("Resource Translation", "", "", null, null)
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+                                        @Html.ActionLink("Static Menu", "", "", null, null)
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Chinese", "Index_ZH", "Resource", null, null)</li>
+                                            <li>@Html.ActionLink("English", "Index_EN", "Resource", null, null)</li>
+                                            <li>@Html.ActionLink("Indonesian", "Index_ID", "Resource", null, null)</li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="dropdown-submenu">
+                                        @Html.ActionLink("Plugin Menu", "", "", null, null)
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Chinese", "PluginIndex_ZH", "Resource", null, null)</li>
+                                            <li>@Html.ActionLink("English", "PluginIndex_EN", "Resource", null, null)</li>
+                                            <li>@Html.ActionLink("Indonesian", "PluginIndex_ID", "Resource", null, null)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                          </ul>
+                    </li>
+                }
+
+                if (Session["SystemFlag"].ToString() == "True")
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@Resources.System<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @*<li>@Html.ActionLink(Resources.SetupPlugin, menu.MethodName, menu.ControllerName, new { Area = menu.Area }, null)</li>*@
+                            <li>@Html.ActionLink("System Setting", "Index", "SystemSetting", null, null)</li>
+                            <li>@Html.ActionLink("Dynamic Menu", "Index", "DynamicMenu", null, null)</li>
+                            <li>@Html.ActionLink("Dimension Setting", "Index", "Dimension_Setting", null, null)</li>
+                            <li>@Html.ActionLink("Country", "Index", "Country", null, null)</li>
+                            <li>@Html.ActionLink("Language", "Index", "Language", null, null)</li>
+                            <li>@Html.ActionLink("Currency", "Index", "Currency", null, null)</li>
+                            <li>@Html.ActionLink("Currency Exchange Rate", "Index", "CurrencyExchangeRate", null, null)</li>
+                            <li>@Html.ActionLink("Job Schedule", "Index", "JobSchedule", null, null)</li>
+                        </ul>
+                    </li>
+            }
+
+            //}
+        }
+        
+        <li>@Html.ActionLink(Resources.Contact, "Contact", "Home", new { Area = "" }, null)</li>
+    </ul>
+</div>

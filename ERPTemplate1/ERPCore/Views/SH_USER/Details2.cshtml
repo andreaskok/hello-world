@@ -1,0 +1,95 @@
+﻿@model ERPDomain.Entities.SH_USER
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+@{
+    ViewBag.Title = "View Only";
+}
+
+<div id="tabs">
+
+    <ul>
+        <li><a href="#tabs-1">User (Read Only)</a></li>
+        <li><a href="#tabs-2">Role Access (Read Only)</a></li>
+    </ul>
+
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>SH_USER</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserID, new { disabled = "true", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserPwd, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserPwd, new { disabled = "true", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserPwd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.UserName, new { disabled = "true", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.UserEmail, new { disabled = "true", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.SH_ROLE.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("SH_ROLEID", null, String.Empty, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SH_ROLEID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                
+            </div>
+        }
+
+    </div>
+
+    <div id="tabs-2">
+        @{
+            if (Model.SH_ROLE != null)
+            {
+                Html.RenderAction("LoadRoleAccess", "SH_USER", new { roleId = Model.SH_ROLE.ID, roleName = Model.SH_ROLE.RoleName });
+            }
+
+        }
+    </div>
+
+</div>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

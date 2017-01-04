@@ -1,0 +1,200 @@
+﻿@model ERPDomain.Entities.ChartOfAccount
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ChartOfAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+            @Html.DisplayNameFor(model => model.AccountGroupID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountGroupID)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccGrpCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccGrpCode)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ActCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubActCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubActCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpenseCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpenseCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccPurpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccPurpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FinAccCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FinAccCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WSAccDistUse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WSAccDistUse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ControlAcc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControlAcc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SuspendAcc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SuspendAcc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Blocked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Blocked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffDateFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffDateFrom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EffDateTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EffDateTo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReportDESC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReportDESC)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubAccType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubAccType)
+        </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

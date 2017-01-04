@@ -1,0 +1,133 @@
+﻿@model ERPDomain.Models.UserViewModel
+
+    @*<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />*@
+    <script type="text/javascript">
+    $(function () {
+        var clkBtn = "";
+        $('input[type="submit"]').click(function (evt) {
+            clkBtn = evt.target.id;
+            //alert('clkBtn=' + clkBtn);
+            //var button = $(this).find('input[type="submit"]');
+            //setTimeout(function () {
+            //    button.attr('disabled', 'disabled');
+            //    alert('lock done');
+            //}, 0);
+        });
+
+        $('#WorkflowForm').submit(function (button) {
+            var btnID = clkBtn;
+            //alert("form submitted; button id=" + btnID);
+            //alert("check=" + $(document.activeElement).val());
+            //var remove = $("#remove").val();
+
+            var save = "";
+            var cancel = "";
+
+            if (btnID == "save") {
+                save = "save";
+                cancel = "";
+            }
+            else if (btnID == "cancel") {
+                save = "";
+                cancel = "cancel";
+            }
+
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize() + "&save=" + save + "&cancel=" + cancel,
+                success: function (xhr) {
+                    $('#dialog-content').html(xhr);
+                    //alert(xhr.success);
+                    //if (xhr.success == null)
+                    //{
+                    //    alert('Invalid password !');
+                    //}
+                    if (typeof (xhr.success) === "undefined")
+                    {
+                        return;
+                    }
+                    if (save != "" && xhr.success)
+                    {
+                        alert('Payment submitted !');
+                    }
+                    if ((save != "" || cancel != "") && xhr.success) {
+                        //alert("closing...");
+                        $("#dialog-workflowsubmit").dialog('close');
+                    }
+                },
+                error: function (response) {
+                    alert(response.msg);  // 
+                }
+
+                
+            });
+            return false;
+        })
+    });
+    </script>
+
+@*<script type="text/javascript">
+    $(document).on('invalid-form.validate', 'form', function () {
+        var button = $(this).find('input[type="submit"]');
+        setTimeout(function () {
+            button.removeAttr('disabled');
+        }, 1);
+    });
+    $(document).on('submit', 'form', function () {
+        var button = $(this).find('input[type="submit"]');
+        setTimeout(function () {
+            button.attr('disabled', 'disabled');
+            alert('lock done');
+        }, 0);
+    });
+</script>*@
+
+    <div class="Centerize" id="dialog-content">
+
+        @using (Html.BeginForm("WorkflowSubmit", "Payment", null, FormMethod.Post, new { @id = "WorkflowForm" }))
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.Message != null)
+            {
+                <div class="ErrorMessage">@ViewBag.Message</div>
+            }
+            <div>
+                <table class="Centerize">
+                    <p style="font-size:12px; font-weight:bold; color:goldenrod; padding-left: 1em;">Workflow: Submit Payment</p>
+
+                    <tbody>
+                        <tr>
+                            <td valign="top">
+                                @*@Html.LabelFor(model => model.LoginEmail)*@
+                                Email
+                            </td>
+
+                            <td valign="top">
+                                @Html.TextBoxFor(model => model.LoginEmail)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                Password
+                            </td>
+
+                            <td valign="top">
+                                @Html.EditorFor(model => model.LoginPassword)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+
+
+
+                <input type="submit" name="save" id="save" value="Submit" />
+                <input type="submit" name="cancel" id="cancel" value="Cancel" />
+                @Html.ValidationSummary()
+            </div>
+        }
+
+
+    </div>
+

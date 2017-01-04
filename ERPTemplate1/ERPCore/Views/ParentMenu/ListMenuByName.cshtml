@@ -1,0 +1,20 @@
+﻿@model IEnumerable<string>
+
+
+
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            @*<li>@Html.ActionLink("Parent Menu", "List", "ParentMenu", new { Area = "" }, null)</li>*@
+            @*<li>@Html.ActionLink("Accounting", "Index", "Accounting", new { Area = "ERPAccounting" }, null) </li>*@
+            @*<li>@Html.ActionLink("Bill Party", "List", "BillParty", new { Area = "ERPAccounting" }, null) </li>*@
+
+
+            @*@Html.ActionLink("Main", "List", "Product")*@
+
+            @foreach (var menu in Model)
+            {
+                <li>@Html.ActionLink(menu, "List", "BillParty", new { Area = "ERPAccounting" }, null)</li>
+            }
+
+
+            <li>@Html.ActionLink("Contact", "Contact", "Home", new { Area = "" }, null)</li>
+

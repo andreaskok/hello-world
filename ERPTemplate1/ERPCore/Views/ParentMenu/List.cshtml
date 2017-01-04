@@ -1,0 +1,12 @@
+﻿@using ERPDomain.Entities
+@model IEnumerable<ParentMenu>
+@{
+    ViewBag.Title = "Parent Menus";
+}
+@foreach (var p in Model)
+{
+    <div>
+        <h3>@p.Name</h3>
+
+    </div>
+}

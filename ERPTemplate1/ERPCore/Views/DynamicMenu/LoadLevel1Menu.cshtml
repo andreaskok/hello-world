@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ERPDomain.Entities.DynamicMenu>
+@{
+    ViewBag.Title = "LoadLevel1Menu";
+}
+
+<div class="column">
+    @{int i = 0;
+        foreach (var item in Model)
+        {
+            <div class="portlet">
+                <div class="portlet-header" style="font-size:20px; font-weight:bold; color:maroon; padding-left: 1em;">@ResourcesPlugin.ResourceManager.GetString(item.ResourceName)</div>
+                <div class="portlet-content" style="font-weight:bold; color:darkcyan; padding-left: 1em;">@Html.Action("LoadLevel2Menu", "DynamicMenu", new { parentId = item.ID})</div>
+            </div>
+            @*if ((i++ % 2 != 0))
+            {
+                @:</div><div class="row">
+            }*@
+        }
+    }
+
+    @*<div class="portlet
+            <div class="portlet-header" style="font-size:20px; font-weight:bold; color:goldenrod; padding-left: 1em;">Production</div>
+            <div class="portlet-content" style="font-weight:bold; color:darkcyan; padding-left: 1em;">The production module provides production planning control module that gives capabilities for planning, execution, quality & plant maintenance.</div>
+        </div>*@
+
+
+
+</div>
+
+
+

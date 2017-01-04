@@ -1,0 +1,83 @@
+﻿@model ERPDomain.Entities.Branch
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function ()
+  {
+      $(function () {
+          $("#txtUnitPrice").change(function () {
+              var qty = $("#txtQuantity").val();
+              var unitPrice = this.value;
+              $("#txtTotal").val(function () {
+                  var myVar = qty * unitPrice;
+                  return myVar;
+              });
+                  //$("#txtB").attr("disabled", "").val("Peter");
+          });
+          $("#txtQuantity").change(function () {
+              var qty = this.value;
+              var unitPrice = $("#txtUnitPrice").val();
+              $("#txtTotal").val(function () {
+                  var myVar = qty * unitPrice;
+                  return myVar;
+              });
+          });
+      });
+  });
+</script>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Invoice Line</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.Organization.OrganizationCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Session["OrganizationCode"], new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Organization.OrganizationCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BranchCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BranchCode, new { htmlAttributes = new { @class = "form-control", id = "InvoiceLineCode", name = "InvoiceLineCode" } })
+                @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BranchName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BranchName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+                &nbsp;&nbsp;<input type="submit" value="Cancel" id="btncancel2" />
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

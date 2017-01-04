@@ -1,0 +1,330 @@
+﻿@model ERPDomain.Entities.Vendor
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vendor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @*<dt>
+                @Html.DisplayNameFor(model => model.ChartOfAccount.AccCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ChartOfAccount.AccCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BankID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BankID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CurrencyID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CurrencyID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TaxCodeID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TaxCodeID)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactPerson)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Town)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Town)
+            </dd>*@
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.State)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.State)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PostCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PostCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CountryCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CountryCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TelNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TelNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FaxNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FaxNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FinAccCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FinAccCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreditTerm)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreditTerm)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TermType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TermType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreditLimit)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreditLimit)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BankCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BankCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BankAccName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BankAccName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BankAccNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BankAccNo)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateID)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.SuppType)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SuppType)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TermCond)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TermCond)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MobileTel)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MobileTel)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CurrencyCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CurrencyCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ComRegisterNum)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ComRegisterNum)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SuppBRN)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SuppBRN)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SuppGSTNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SuppGSTNo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateGST)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateGST)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TaxCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TaxCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FinSupplierCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FinSupplierCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsEnabledSelfBilled)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsEnabledSelfBilled)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RMCDApproveNo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RMCDApproveNo)
+            </dd>*@
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

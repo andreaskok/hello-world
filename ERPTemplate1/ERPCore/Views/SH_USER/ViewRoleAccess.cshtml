@@ -1,0 +1,63 @@
+﻿@model ERPDomain.Models.RoleAccessModel
+
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.SH_ROLE.RoleName)*@
+            Dynamic Menu
+        </th>
+        <th>
+            Is Checker
+        </th>
+        <th>
+            Allow Read
+        </th>
+        <th>
+            Allow Insert
+        </th>
+        <th>
+            Allow Update
+        </th>
+        <th>
+            Allow Delete
+        </th>
+        <th>
+            Allow Print
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.SH_ROLEACCESSS)
+    {
+        @Html.HiddenFor(modelItem => item.SH_ROLE.ID)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DynamicMenu.MenuName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsChecker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowRead)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowInsert)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowUpdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowDelete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowPrint)
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+
+

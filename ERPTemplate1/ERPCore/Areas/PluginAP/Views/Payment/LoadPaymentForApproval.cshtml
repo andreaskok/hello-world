@@ -1,0 +1,70 @@
+﻿@model ERPDomain.Models.WorkflowPaymentModel
+<script src="~/Scripts/popupui2.js"></script>
+
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div id="dialog-workflowsubmit2" style="display: none">
+</div>
+
+<div id="dialog-workflowrecommend2" style="display: none">
+</div>
+
+<div id="dialog-workflowapprove2" style="display: none">
+</div>
+
+@{
+    if (Model.Payment != null)
+    {
+        if (Model.Payment.WorkflowStatus.Equals("Submitted") || Model.Payment.WorkflowStatus.Equals("Recommended"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Payment.PaymentCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Payment.VendorCode)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.PaymentType)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Payment.BankCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Payment.Remark)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Payment.ID }, new { @class = "lnkEdit2  btn btn-primary" }) 
+                    @Html.ActionLink("Details", "Details", new { id = Model.Payment.ID }, new { @class = "lnkDetail2  btn btn-primary" }) 
+
+                    @if (Model.Payment.WorkflowStatus.Equals("Submitted"))
+                    {
+                        @Html.ActionLink("Recommend/Deny", "WorkflowRecommend", new { id = Model.Payment.ID }, new { @class = "lnkWorkflowRecommend2  btn btn-primary" })
+                    }
+                    else if (Model.Payment.WorkflowStatus.Equals("Recommended"))
+                    {
+                        @Html.ActionLink("Approve/Deny", "WorkflowApprove", new { id = Model.Payment.ID }, new { @class = "lnkWorkflowApprove2  btn btn-primary" })
+                    }
+
+                </td>
+            </tr>
+        }
+    }
+
+}
+

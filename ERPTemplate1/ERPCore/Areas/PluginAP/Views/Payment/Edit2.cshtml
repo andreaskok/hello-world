@@ -1,0 +1,235 @@
+﻿
+@model ERPDomain.Models.PaymentLineModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @if (TempData["Message"].ToString() != "")
+    {
+        <div class="Message">@TempData["Message"]</div>
+    }
+    @if (ViewBag.DeleteMessage != null)
+    {
+        <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+    }
+</div>
+
+<div id="tabs">
+
+    <ul>
+        <li><a href="#tabs-1">Payment</a></li>
+        <li><a href="#tabs-2">Payment Line</a></li>
+
+    </ul>
+
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Payment.ID)
+                @Html.HiddenFor(model => model.Payment.TotalAmount)
+
+                <table id="" border="0" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="150" />
+                        <col width="250" />
+                        <col width="80" />
+                        <col width="250" />
+                    </colgroup>
+
+
+
+                    <tr>
+                        <td>
+                            <font color="red">*</font>Payment Code
+                        </td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(model => model.Payment.PaymentCode, new { style = "max-width: 100%;width: 540px;margin-bottom:3px;margin-right:3px;" })
+                            @Html.ValidationMessageFor(model => model.Payment.PaymentCode, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <font color="red">*</font>Vendor Code
+                        </td>
+                        <td>
+                            @Html.DropDownList("Vendor", null, String.Empty, new { style = "width: 200px;margin-bottom:3px;margin-right:3px;" })
+                            @Html.ValidationMessageFor(model => model.Payment.VendorCode, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <font color="red">*</font>Bank Code
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.Payment.BankCode, new { style = "width: 210px;margin-bottom:3px;margin-right:3px;" })
+                            @Html.ValidationMessageFor(model => model.Payment.BankCode, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+
+
+                    @if (Model.Payment.TotalAmount > 0)
+                    {
+                        <tr>
+                            <td>
+                                <font color="red"></font>Total Amount
+                            </td>
+                            <td colspan="3">
+                                @Html.TextBoxFor(model => model.Payment.TotalAmount, new { disabled = "disabled", style = "max-width: 100%;width: 200px;margin-bottom:3px;margin-right:3px;text-align: right" })
+                                @Html.ValidationMessageFor(model => model.Payment.TotalAmount, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                    }
+
+                    @if (Model.Payment.TotalGstAmount > 0)
+                    {
+                        <tr>
+                            <td>
+                                <font color="red"></font>Gst Amount
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Payment.TotalGstAmount, new { disabled = "disabled", style = "width: 200px;margin-bottom:3px;margin-right:3px;text-align: right" })
+                            </td>
+                            <td>
+                                <font color="red"></font>Amount After Gst
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Payment.TotalAmountAfterGst, new { disabled = "disabled", style = "width: 210px;margin-bottom:3px;margin-right:3px;text-align: right" })
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td>
+                            <font color="red"></font>Remark
+                        </td>
+                        <td colspan="3">
+                            @Html.TextAreaFor(model => model.Payment.Remark, new { style = "max-width: 100%;width: 540px;margin-bottom:3px;margin-right:3px;height:100px", htmlAttributes = new { rows = 10 } })
+
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-success" })
+        </div>
+
+    </div>
+
+    <div id="tabs-2">
+        <p>
+            @Html.ActionLink("Create New", "CreatePaymentLine", new { paymentId = Model.Payment.ID, paymentCode = Model.Payment.PaymentCode }, new { id = "lnkCreate2" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>Payment Code</th>
+                <th>PaymentLine Code</th>
+                <th>ItemCode</th>
+                <th>Amount</th>
+                <th>AccCode</th>
+                @if (Model.Payment.TotalGstAmount > 0)
+                {
+                    <th>Gst %</th>
+                    <th>Gst Amount</th>
+                    <th>Amount After Gst</th>
+                }
+            </tr>
+            @if (Model.PaymentLine != null)
+            {
+                foreach (var item in Model.PaymentLine)
+                {
+                    string selectedRow = "";
+                    if (item.PaymentID == ViewBag.paymentId)
+                    {
+                        selectedRow = "success";
+                    }
+                    <tr class="@selectedRow">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Payment.PaymentCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentLineCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ItemCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccCode)
+                        </td>
+                        @if (item.GstPct > 0)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GstPct)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GstAmount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AmountAfterGst)
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Edit", "EditPaymentLine", new { paymentId = Model.Payment.ID, paymentLineId = item.ID, paymentCode = Model.Payment.PaymentCode, paymentLineCode = item.PaymentLineCode }, new { @class = "lnkEdit2" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeletePaymentLine", new { paymentId = Model.Payment.ID, paymentLineId = item.ID }, new { @class = "lnkDelete2" })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
+
+</div>
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

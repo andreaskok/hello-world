@@ -1,0 +1,54 @@
+﻿@model List<ERPCore.Models.DimensionValueListModel>
+
+<p>
+    @Html.ActionLink("Create New", "CreateDimensionValue", new { DimId = Session["DimID"], DimCode = Session["DimCode"] }, new { id = "lnkCreate2" })
+</p>
+
+@using (Html.BeginForm("LoadDimensionValue", "Dimension_Setting"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+
+    <table class="table">
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.DimensionCode)
+                DimensionCode
+            </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.DimensionValue)*@
+                List of Dimension Predefined Value
+            </th>
+            <th></th>
+        </tr>
+
+        @*@foreach (var item in Model)*@
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => Model[i].DimensionSettingID)
+            @Html.HiddenFor(modelItem => Model[i].DimensionStatus)
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => Model[i].DimensionCode)
+                </td>*@
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].DimensionValue)
+                </td>
+                @*<td>
+                        @Html.ActionLink("Delete", "DeleteCustomerDimension", new { CustId = Model[i].CustomerID, DimId = Model[i].ID }, new { @class = "lnkDelete2" })
+                    </td>*@
+            </tr>
+        }
+
+
+    </table>
+
+    @*<div class="form-group">
+            <input type="submit" value="Batch Save" class="btn btn-default" />
+        </div>*@
+    <br />
+
+}
+

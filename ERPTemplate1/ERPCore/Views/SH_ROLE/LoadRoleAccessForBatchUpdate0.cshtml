@@ -1,0 +1,80 @@
+﻿@model List<ERPDomain.Entities.SH_ROLEACCESS>
+
+
+@using (Html.BeginForm("LoadRoleAccessForBatchUpdate", "SH_ROLE"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.SH_ROLE.RoleName)*@
+                Dynamic Menu
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.A)*@
+                Is Checker
+            </th>
+            <th>
+                Allow Read
+            </th>
+            <th>
+                Allow Insert
+            </th>
+            <th>
+                Allow Update
+            </th>
+            <th>
+                Allow Delete
+            </th>
+            <th>
+                Allow Print
+            </th>
+            <th></th>
+        </tr>
+
+        @*@foreach (var item in Model)*@
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => Model[i].ID)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].DynamicMenu.MenuName)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].IsChecker)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].AllowRead)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].AllowInsert)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].AllowUpdate)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].AllowDelete)
+                </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => Model[i].AllowPrint)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteRoleAccess", new { roleId = Model[i].SH_ROLEID, roleAccessId = Model[i].ID }, new { @class = "lnkDelete2" })
+                </td>
+            </tr>
+        }
+
+
+
+    </table>
+
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+    <br />
+
+}

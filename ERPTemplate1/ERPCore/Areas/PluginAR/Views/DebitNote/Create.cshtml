@@ -1,0 +1,188 @@
+﻿@*@model ERPDomain.Entities.DebitNote*@
+@model ERPDomain.Models.DebitNoteLineModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $.validator.methods.date = function (value, element) {
+            Globalize.culture("en-GB");
+            // you can alternatively pass the culture to parseDate instead of
+            // setting the culture above, like so:
+            // parseDate(value, null, "en-AU")
+            return this.optional(element) || Globalize.parseDate(value) !== null;
+        }
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker({
+            dateFormat: 'dd/mm/yy',
+            showOn: "button",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true
+        });
+    })
+</script>
+
+<script type="text/javascript">
+    $(document).on('invalid-form.validate', 'form', function () {
+        var button = $(this).find('input[type="submit"]');
+        setTimeout(function () {
+            button.removeAttr('disabled');
+        }, 1);
+    });
+    $(document).on('submit', 'form', function () {
+        //var dateTypeVar = $('#txtDebitNoteDate').datepicker('getDate');
+        //var oldFormat = $.datepicker.formatDate('mm/dd/yy', dateTypeVar);
+        //alert("oldFormat=" + oldFormat);
+        //$('#txtDebitNoteDate').val(oldFormat);
+        var button = $(this).find('input[type="submit"]');
+        setTimeout(function () {
+            button.attr('disabled', 'disabled');
+            //alert('done');
+        }, 0);
+    });
+    //$('#submit').submit(function () {
+
+    //    var dateTypeVar = $('#txtDebitNoteDate').datepicker('getDate');
+    //    var oldFormat = $.datepicker.formatDate('mm/dd/yy', dateTypeVar);
+    //    alert("oldFormat=" + oldFormat);
+    //    $('#txtDebitNoteDate').val(oldFormat);
+    //});
+</script>
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<h2>Create</h2>*@
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @*@if (TempData["Message"].ToString() != "")
+        {
+            <div class="Message">@TempData["Message"]</div>
+        }*@
+    @*@if (TempData["DeteleMessage"].ToString() != "")
+        {
+            <div class="Message">@TempData["DeteleMessage"]</div>
+        }*@
+</div>
+
+<body>
+    <div class="centerBorder">
+        <div>
+            @using (Html.BeginForm())
+            {
+
+                <div class="panel panel-default">
+                    <label style="margin-left:3px;margin-right:7px;"><font color="#E55010">Debit Note</font></label>
+                    <input type="submit" value="Create" class="btn btn-primary" style="width:100px" />
+                </div>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <table id="" border="0" cellspacing="0" cellpadding="0">
+                    <colgroup>
+                        <col width="150" />
+                        <col width="250" />
+                        <col width="80" />
+                        <col width="250" />
+                    </colgroup>
+
+                    <tr>
+                        <td>
+                            <font color="blue">*</font>Debit Note Code
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.DebitNote.DebitNoteCode, new { style = "width: 200px;margin-bottom:3px;margin-right:3px;", Title = "E.g. Male or Femail" })
+                            @Html.ValidationMessageFor(model => model.DebitNote.DebitNoteCode, "", new { @class = "text-danger" })
+                        </td>
+                        <td>
+                            <font color="blue"></font>Total Amount
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.DebitNote.TotalAmount, new { disabled = "disabled", style = "width: 210px;margin-bottom:3px;margin-right:3px;text-align: right" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <font color="blue">*</font>Customer Ref
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.DebitNote.CustRef, new { style = "width: 200px;margin-bottom:3px;margin-right:3px;", Title = "E.g. Male or Femail" })
+                        </td>
+                        <td>
+                            <font color="blue"></font>DN Date
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.DebitNote.DebitNoteDate, new { id = "txtDebitNoteDate", htmlAttributes = new { @class = "date-picker" }, style = "width: 500px;" })
+                            @Html.ValidationMessageFor(model => model.DebitNote.DebitNoteDate, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <font color="blue"></font>Remark
+                        </td>
+                        <td colspan="3">
+                            @Html.TextAreaFor(model => model.DebitNote.Remark, new { style = "max-width: 100%;width: 540px;margin-bottom:3px;margin-right:3px;height:50px", htmlAttributes = new { rows = 3 } })
+                        </td>
+                    </tr>
+                </table>
+
+
+
+
+            }
+        </div>
+        <div id="tabs">
+
+            <ul>
+                <li><a href="#tabs-1">Debit Note Line: Excel</a></li>
+            </ul>
+
+            <div id="tabs-1">
+                @if (Session["DebitNoteID"] != null)
+                {
+                    Html.RenderAction("LoadDebitNoteLineExcel", "DebitNote", new { debitnoteId = Model.DebitNote.ID });
+                }
+            </div>
+
+        </div>
+        <div>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+
+    </div>
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

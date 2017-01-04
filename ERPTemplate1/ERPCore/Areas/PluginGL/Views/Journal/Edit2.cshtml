@@ -1,0 +1,226 @@
+﻿@model ERPDomain.Models.JournalLineModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @*@if (TempData["Message"].ToString() != "")*@
+    @if (ViewBag.Message != null)
+    {
+        <div class="Message">@TempData["Message"]</div>
+    }
+    @if (ViewBag.DeleteMessage != null)
+    {
+        <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+    }
+</div>
+
+<div id="tabs">
+
+    <ul>
+        <li><a href="#tabs-1">Journal</a></li>
+        <li><a href="#tabs-2">Journal Line</a></li>
+
+    </ul>
+
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Journal</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Journal.ID)
+                @Html.HiddenFor(model => model.Journal.LocCode)
+                @Html.HiddenFor(model => model.Journal.ChargeFrom)
+                @Html.HiddenFor(model => model.Journal.FromJrnID)
+                @Html.HiddenFor(model => model.Journal.IsPosted)
+                @Html.HiddenFor(model => model.Journal.DocAmt)
+
+               <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.JournalCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.JournalCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.JournalCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.ReceiveFrom, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.ReceiveFrom, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.ReceiveFrom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.TransactType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.TransactType, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.TransactType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.RefNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.RefNo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.RefNo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.IsPosted, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.Journal.IsPosted, new { disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.Journal.IsPosted, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.Journal.DocDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.DocDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.DocDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.DocAmt, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.DocAmt, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.DocAmt, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Journal.GrandTotal, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Journal.GrandTotal, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Journal.GrandTotal, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" name="Save" value="Save" class="btn btn-default" />
+                        &nbsp;&nbsp;<input type="submit" name="Post" value="Post" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+
+    <div id="tabs-2">
+        <p>
+            @Html.ActionLink("Create New", "CreateJournalLine", new { journalId = Model.Journal.ID, journalCode = Model.Journal.JournalCode }, new { id = "lnkCreate2" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>Journal Code</th>
+                <th>JournalLine Code</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th>Debit/Credit</th>
+                <th>AccCode</th>
+            </tr>
+            @if (Model.JournalLine != null)
+            {
+                foreach (var item in Model.JournalLine)
+            {
+                string selectedRow = "";
+                if (item.JournalID == ViewBag.journalId)
+                {
+                    selectedRow = "success";
+                }
+                <tr class="@selectedRow">
+
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Journal.JournalCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JournalLineCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DebitCreditIndicator)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccCode)
+                    </td>
+                     <td>
+                        @*@Html.ActionLink("Edit", "EditJournalLine", new { journalId = item.Journal.ID, journalLineId = item.ID, journalCode = Model.Journal.JournalLine }, new { @class = "lnkEdit2" })*@
+                        @Html.ActionLink("Edit", "EditJournalLine", new { journalId = Model.Journal.ID, journalLineId = item.ID, journalCode = Model.Journal.JournalCode, journalLineCode = item.JournalLineCode }, new { @class = "lnkEdit2" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "DeleteJournalLine", new { journalId = Model.Journal.ID, journalLineId = item.ID }, new { @class = "lnkDelete2" })
+                    </td>
+                </tr>
+            }
+            }
+        </table>
+
+    </div>
+
+</div>
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

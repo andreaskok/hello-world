@@ -1,0 +1,54 @@
+﻿@model List<ERPDomain.Models.ResourceModel>
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+    <br />
+<div class="form-group">
+    <input type="submit" value="Batch Save" class="btn btn-default" />
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            No
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Value
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        int j = 0;
+    }
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        @Html.HiddenFor(modelItem => Model[i].Name)
+        <tr>
+            <td>
+                @(j = i + 1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model[i].Name, new { style = "width: 200px;margin-bottom:3px;margin-right:3px;height:35px" })
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => Model[i].Value, new { style = "max-width: 100%;width: 500px;margin-bottom:3px;margin-right:3px;height:35px" })
+            </td>
+
+        </tr>
+    }
+
+
+
+</table>
+
+<div class="form-group">
+    <input type="submit" value="Batch Save" class="btn btn-default" />
+</div>
+<br />
+
+}

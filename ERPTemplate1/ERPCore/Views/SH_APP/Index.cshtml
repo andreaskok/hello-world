@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ERPDomain.Entities.SH_APP>
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<body>
+    <div class="centerBorder">
+        <p>
+            <font style="font-size:14px; font-weight:bold; color:darkgreen;">SH_APP: Index</font><br><br>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModuleID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FunctionName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModuleID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FunctionName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-warning" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>

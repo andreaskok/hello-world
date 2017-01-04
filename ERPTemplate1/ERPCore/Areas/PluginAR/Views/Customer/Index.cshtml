@@ -1,0 +1,104 @@
+﻿@*@model IEnumerable<ERPDomain.Entities.Customer>*@
+@model PagedList.IPagedList<ERPDomain.Entities.Customer>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<div id="dialog-alert" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit" style="display: none">
+</div>
+<div id="dialog-detail" style="display: none">
+</div>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<body>
+    <div class="centerBorder">
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="Message">ViewBag.Message</div>
+            }
+            @if (ViewBag.DeleteMessage != null)
+            {
+                <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+            }
+        </div>
+
+        <p>
+            <font style="font-size:14px; font-weight:bold; color:darkgreen;">Customer: Index</font><br><br>
+            @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" }) @*Do not use pop up menu*@
+            @*@Html.ActionLink("Create New", "Create", null, new { id = "lnkCreate" })*@
+        </p>
+
+        @using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+        {
+            <p>
+                Search by Customer Code: @Html.TextBox("SearchValue", ViewBag.CurrentFilter as string)
+                <input type="submit" value="Filter" />
+            </p>
+        }
+
+        <table class="table">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.CustomerCode)*@
+                    @Html.ActionLink("CustomerCode", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Name)*@
+                    @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ContactPerson)*@
+                    @Html.ActionLink("ContactPerson", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContactPerson)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "lnkEdit  btn btn-primary" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "lnkDetail  btn btn-primary" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "lnkDelete  btn btn-warning" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

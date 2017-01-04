@@ -1,0 +1,141 @@
+﻿@model ERPDomain.Models.UserRoleModel
+@*@model ERPDomain.Entities.SH_USER*@
+@*@model IEnumerable<ERPDomain.Entities.SH_USER>*@
+@{
+    Layout = "";
+}
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2>Details</h2>
+
+<div>
+    <dt>
+        @Html.DisplayNameFor(model => model.SH_USER)
+    </dt>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SH_USER.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SH_USER.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SH_USER.UserPwd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SH_USER.UserPwd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SH_USER.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SH_USER.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SH_USER.UserEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SH_USER.UserEmail)
+        </dd>
+
+    </dl>
+
+
+
+</div>
+
+<dt>
+    @Html.DisplayNameFor(model => model.SH_ROLEMEMBERS)
+</dt>
+<dd>
+    <table class="table">
+        <tr>
+            <th>Role</th>
+            <th>Description</th>
+        </tr>
+        @foreach (var item in Model.SH_ROLEMEMBERS)
+        {
+            string selectedRow = "";
+            if (item.SH_ROLEID == ViewBag.RoleID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.SH_APP.FunctionName)*@
+                    @Html.DisplayFor(modelItem => item.SH_ROLE.RoleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SH_ROLE.RoleDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Details", new { id = item.SH_USERID, roleId = item.SH_ROLEID })
+
+                </td>
+            </tr>
+        }
+    </table>
+</dd>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SH_USER.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@if (Model.SH_ROLEACCESSS != null)
+{
+    <dt>
+        @Html.DisplayNameFor(model => model.SH_ROLEACCESSS)
+    </dt>
+    <table class="table">
+        <tr>
+            <th></th>
+            @*<th>Number</th>*@
+            <th>AppID</th>
+            <th>App Function</th>
+            <th>Allow Read</th>
+            <th>Allow Update</th>
+        </tr>
+
+        @foreach (var item in Model.SH_ROLEACCESSS)
+        {
+            string selectedRow = "";
+            if (item.SH_ROLEID == ViewBag.RoleID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { roleId = item.SH_ROLEID })
+                </td>
+                <td>
+                    @item.SH_APPID
+                </td>
+                <td>
+                    @item.SH_APP.FunctionName
+                </td>
+                <td>
+                    @item.AllowRead
+                </td>
+                <td>
+                    @item.AllowUpdate
+                </td>
+            </tr>
+        }
+
+    </table>
+}

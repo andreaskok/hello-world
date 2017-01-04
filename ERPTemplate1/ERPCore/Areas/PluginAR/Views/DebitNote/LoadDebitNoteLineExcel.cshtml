@@ -1,0 +1,87 @@
+﻿@model List<PluginAR.Models.DebitNoteLineExcelModel>
+
+
+<script src="~/Scripts/itech-excel.js"></script>
+<div id="message"></div>
+<div id="excel-content">
+    @using (Html.BeginForm("LoadDebitNoteLineExcel", "DebitNote", null, FormMethod.Post, new { @id = "ExcelForm" }))
+    {
+        @Html.AntiForgeryToken()
+        @*<div class="form-group">
+            <input id="submitButton" type="submit" value="Grid Save" class="btn btn-success" style="width:100px"/>
+        </div>*@
+
+
+        <table class="excelTable" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>
+                    DN
+                </th>
+                <th>
+                    Line Code
+                </th>
+                <th>
+                    Acc Code
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Unit Price
+                </th>
+                <th>
+                    Total
+                </th>
+
+                <th></th>
+            </tr>
+
+
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                @Html.HiddenFor(modelItem => Model[i].ID)
+                @Html.HiddenFor(modelItem => Model[i].DebitNoteCode)
+                
+                <tr class="excelTable">
+                    <td>
+                        @Html.TextBoxFor(modelItem => Model[i].DebitNoteCode, new { id = "txtDebitNoteCode_" + i, disabled = "disabled", style = "width: 80px;margin-bottom:0px;margin-right:0px;text-align: left" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(modelItem => Model[i].DebitNoteLineCode, new { id = "txtDebitNoteLineCode_" + i, style = "max-width: 100%;width: 100px;margin-bottom:0px;margin-right:0px;text-align: left" })
+                    </td>
+                    <td>
+                        @Html.DropDownList("ChartOfAcc" + i, null, String.Empty, new { id = "txtDebitNoteCode_" + i, style = "max-width: 100%;width: 100px;height:23px;margin-bottom:0px;margin-right:0px;text-align: left" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(Model => Model[i].Description, new { id = "txtDescription_" + i, style = "max-width: 100%;width: 350px;margin-bottom:0px;margin-right:0px;text-align: left" })
+                    </td>
+                    <td class="numCol">
+                        @Html.TextBoxFor(modelItem => Model[i].Quantity, new { id = "txtQuantity_" + i, style = "width: 80px;margin-bottom:0px;margin-right:0px;text-align: right" })
+                    </td>
+                    <td class="numCol">
+                        @Html.TextBoxFor(modelItem => Model[i].UnitPrice, new { id = "txtUnitPrice_" + i, style = "width: 80px;margin-bottom:0px;margin-right:0px;text-align: right" })
+                    </td>
+                    <td class="numCol">
+                        @Html.TextBoxFor(modelItem => Model[i].Total, new { id = "txtTotal_" + i, disabled = "disabled", style = "width: 80px;margin-bottom:0px;margin-right:0px;text-align: right" })
+                    </td>
+                    <td>
+                        <input type="submit" @Html.Raw(string.Format("id= DeleteButton_{0} value=  {1}", Model[i].ID, "Delete " + Model[i].DebitNoteLineCode)) />
+                        @*<input id="submitButton" type="submit" value="Batch Save" class="btn btn-success" />*@
+                        @*@Html.ActionLink("Delete", "DeleteUserRole", new { debitnoteId = Model[i].DebitNoteID, debitnoteLineId = Model[i].ID }, new { @class = "lnkDelete2" })*@
+                    </td>
+
+                </tr>
+            }
+
+
+
+        </table>
+
+
+        <br />
+
+    }
+</div>

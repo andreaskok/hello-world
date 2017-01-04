@@ -1,0 +1,53 @@
+﻿@model List<ERPCore.Models.CustomerDimensionModel>
+
+
+@using (Html.BeginForm("LoadCustomerDimension0", "Customer"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" value="Batch Save" class="btn btn-default" />
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DimensionCode)*@
+                DimensionCode
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.DimensionValue)*@
+                DimensionValue
+            </th>
+            <th></th>
+        </tr>
+
+        @*@foreach (var item in Model)*@
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => Model[i].DimensionTableRelationshipID)
+            @Html.HiddenFor(modelItem => Model[i].DimensionSettingID)
+            @Html.HiddenFor(modelItem => Model[i].CustomerID)
+            @Html.HiddenFor(modelItem => Model[i].DimensionCode)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model[i].DimensionCode)
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].FreeTextValue)
+                </td>
+                @*<td>
+                    @Html.ActionLink("Delete", "DeleteCustomerDimension", new { CustId = Model[i].CustomerID, DimId = Model[i].ID }, new { @class = "lnkDelete2" })
+                </td>*@
+            </tr>
+        }
+
+
+    </table>
+
+    @*<div class="form-group">
+            <input type="submit" value="Batch Save" class="btn btn-default" />
+        </div>*@
+    <br />
+
+}
+

@@ -1,0 +1,127 @@
+﻿@*@model ERPDomain.Entities.SH_ROLE*@
+@model ERPDomain.Models.RoleAccessModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @if (TempData["Message"].ToString() != "")
+    {
+        <div class="Message">@TempData["Message"]</div>
+    }
+    @*@if (TempData["DeleteMessage"].ToString() != "")
+    {
+        <div class="Message">@TempData["DeleteMessage"]</div>
+    }*@
+</div>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Role</a></li>
+        @*<li><a href="#tabs-2">Role Access</a></li>
+        <li><a href="#tabs-3">Batch Role Access</a></li>*@
+        <li><a href="#tabs-4">Batch Role Access</a></li>
+    </ul>
+
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>SH_ROLE</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SH_ROLE.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SH_ROLE.RoleName, new { htmlAttributes = new { @class = "form-control", id = "RoleName", name = "RoleName" } })
+                        @Html.ValidationMessageFor(model => model.SH_ROLE.RoleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SH_ROLE.RoleDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SH_ROLE.RoleDescription, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SH_ROLE.RoleDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SH_ROLE.AdminFlag, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.SH_ROLE.AdminFlag, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SH_ROLE.AdminFlag, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+    @*<div id="tabs-2">
+        @if (Session["RoleID"] != null)
+        { 
+            Html.RenderAction("LoadRoleAccess0", "SH_ROLE", new { roleId = Model.SH_ROLE.ID, roleName = Model.SH_ROLE.RoleName });
+        }
+    </div>
+
+    <div id="tabs-3">
+        @if (Session["RoleID"] != null)
+        {
+            Html.RenderAction("LoadRoleAccessForBatchUpdate0", "SH_ROLE", new { roleId = Model.SH_ROLE.ID, roleName = Model.SH_ROLE.RoleName });
+        }
+    </div>*@
+
+    <div id="tabs-4">
+        @if (Session["RoleID"] != null)
+        {
+            Html.RenderAction("LoadRoleAccessForBatchUpdate02", "SH_ROLE", new { roleId = Model.SH_ROLE.ID, roleName = Model.SH_ROLE.RoleName });
+        }
+    </div>
+
+
+
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

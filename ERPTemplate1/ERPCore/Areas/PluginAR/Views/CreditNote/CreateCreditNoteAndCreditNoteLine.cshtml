@@ -1,0 +1,117 @@
+﻿@model ERPDomain.Entities.CreditNoteLine
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function ()
+  {
+      $(function () {
+          $("#txtUnitPrice").change(function () {
+              var qty = $("#txtQuantity").val();
+              var unitPrice = this.value;
+              $("#txtTotal").val(function () {
+                  var myVar = qty * unitPrice;
+                  return myVar;
+              });
+                  //$("#txtB").attr("disabled", "").val("Peter");
+          });
+          $("#txtQuantity").change(function () {
+              var qty = this.value;
+              var unitPrice = $("#txtUnitPrice").val();
+              $("#txtTotal").val(function () {
+                  var myVar = qty * unitPrice;
+                  return myVar;
+              });
+          });
+      });
+  });
+</script>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Credit Note Line</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.ChartOfAccountID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreditNote.CreditNoteCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Session["CreditNoteCode"], new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreditNote.CreditNoteCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreditNoteLineCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreditNoteLineCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreditNoteLineCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Quantity, new { id = "txtQuantity", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.UnitPrice, new { id = "txtUnitPrice", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.TextBoxFor(model => model.Total, new { id = "txtTotal", disabled = "true", htmlAttributes = new { @class = "form-control" } })*@
+                @Html.TextBoxFor(model => model.Total, new { id = "txtTotal", htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Total, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChartOfAccount.AccCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ChartOfAcc", null, String.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ChartOfAccountID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+                &nbsp;&nbsp;<input type="submit" value="Cancel" id="btncancel2" />
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

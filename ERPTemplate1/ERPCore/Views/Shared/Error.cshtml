@@ -1,0 +1,44 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+<head>
+    <style>
+        body.centerBorder {
+            margin: 80px 80px 80px 100px;
+            width: 80%;
+            border: 1px solid orange;
+            border-radius: 10px;
+            padding-left: 2em;
+            padding-top: 2em;
+            padding-bottom: 2em;
+        }
+    </style>
+</head>
+<br>
+<body class="centerBorder">
+    <p>
+        <font style="font-size:18px; font-weight:bold; color:red;">Error !</font><br><br>
+        <font style="font-size:14px; font-weight:bold; color:darkgreen;">Message</font>: @Model.Exception.Message <br><br>
+    </p>
+    @if (Model.Exception.InnerException != null)
+    {
+        <p>
+            <font style="font-size:14px; font-weight:bold; color:darkgreen;">Inner Exception</font>: @Model.Exception.InnerException
+        </p>
+    }
+    @if (System.Web.Configuration.WebConfigurationManager.AppSettings["LogDebug"].Equals("true"))
+    {
+        <p>
+            <font style="font-size:14px; font-weight:bold; color:darkgreen;">Stack Trace</font>: @Model.Exception.StackTrace
+        </p>
+    }
+    
+</body>
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+﻿@*@model IEnumerable<ERPDomain.Entities.CurrencyExchangeRate>*@
+@model PagedList.IPagedList<ERPDomain.Entities.CurrencyExchangeRate>
+@using PagedList.Mvc;
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<div id="dialog-alert" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit" style="display: none">
+</div>
+<div id="dialog-detail" style="display: none">
+</div>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<body>
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            <div class="Message">ViewBag.Message</div>
+        }
+        @if (ViewBag.DeleteMessage != null)
+        {
+            <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+        }
+    </div>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+        @*@Html.ActionLink("Create New", "Create", null, new { id = "lnkCreate" })*@
+    </p>
+
+    @using (Html.BeginForm("Index", "CurrencyExchangeRate", FormMethod.Get))
+    {
+        <p>
+            Search by Foreign Currency Code: @Html.TextBox("SearchValue", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Filter" />
+        </p>
+    }
+
+    <table class="table">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ForeignCurrencyCode)*@
+                @Html.ActionLink("ForeignCurrencyCode", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.BaseCurrencyCode)*@
+                @Html.ActionLink("BaseCurrencyCode", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.ExchangeRate)*@
+                @Html.ActionLink("ExchangeRate", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.EffectiveDate)*@
+                @Html.ActionLink("EffectiveDate", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ForeignCurrencyCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseCurrencyCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExchangeRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffectiveDate)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "lnkEdit" }) |*@
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "lnkDetail" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "lnkDelete" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+

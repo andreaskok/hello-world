@@ -1,0 +1,265 @@
+﻿@model ERPDomain.Entities.Payment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VendorCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VendorCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrintDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrintDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequePrintDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequePrintDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OutstandingAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OutstandingAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreditBankCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreditBankCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreditDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreditDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProposalID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProposalID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyOutAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyOutAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentRefNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentRefNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentRefDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentRefDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

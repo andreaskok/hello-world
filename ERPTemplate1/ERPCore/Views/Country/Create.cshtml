@@ -1,0 +1,159 @@
+﻿@*@model ERPDomain.Entities.Country*@
+@model ERPDomain.Models.CountryStateModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<h2>Create</h2>*@
+
+
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @if (TempData["Message"].ToString() != "")
+    {
+        <div class="Message">@TempData["Message"]</div>
+    }
+    @*@if (TempData["DeteleMessage"].ToString() != "")
+        {
+            <div class="Message">@TempData["DeteleMessage"]</div>
+        }*@
+</div>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Country</a></li>
+        <li><a href="#tabs-2">Country State</a></li>
+    </ul>
+
+    <div id="tabs-1">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Country</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.CurrencyID, "CurrencyID", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CurrencyID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CurrencyID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country.CountryCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Country.CountryCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Country.CountryCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Country.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Country.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Currency.CurrencyCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Currency", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Country.CurrencyID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div id="tabs-2">
+        @if (Session["CountryID"] != null)
+        {
+            <p>
+                @Html.ActionLink("Create New", "CreateCountryAndCountryState", null, new { id = "lnkCreate2" })
+            </p>
+
+            <table class="table">
+                <tr>
+                    <th>Country State</th>
+                </tr>
+                @if (Model.CountryState != null && Session["CountryStateID"].ToString() != "")
+                {
+                    foreach (var item in Model.CountryState)
+                    {
+                        string selectedRow = "";
+                        if (item.CountryID == ViewBag.countryId)
+                        {
+                            selectedRow = "success";
+                        }
+                        <tr class="@selectedRow">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country.CountryCode)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditCountryState", new { countryId = item.Country.ID, countryStateId = item.ID }, new { @class = "lnkEdit2" })
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        }
+    </div>
+
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

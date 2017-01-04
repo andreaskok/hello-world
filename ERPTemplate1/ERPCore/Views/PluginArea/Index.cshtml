@@ -1,0 +1,113 @@
+﻿@model IEnumerable<ERPDomain.Entities.PluginArea>
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Sortable - Connect lists</title>
+
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    
+    <style>
+        #sortable1, #sortable2 {
+            border: 1px solid #eee;
+            border-radius: 25px;
+            width: 185px;
+            min-height: 20px;
+            list-style-type: none;
+            margin: 0;
+            padding: 5px 0 0 0;
+            float: left;
+            margin-right: 50px;
+        }
+
+            #sortable1 li, #sortable2 li {
+                margin: 20px 10px 20px 10px;
+                padding: 5px;
+
+                font-size: 1.2em;
+                width: 130px;
+            }
+    </style>
+    <script>
+        $(function() {
+
+            $("#sortable1").sortable({
+                connectWith: ".connectedSortable",
+                receive: removeItem
+            }).disableSelection();
+
+            $("#sortable2").sortable({
+                connectWith: ".connectedSortable",
+                receive: pluginItem
+            }).disableSelection();
+            //url: "/PluginArea/UpdatePlugin",
+            function pluginItem(event, ui) {
+                var urlUpdatePlugin = $("#ajaxUpdatePlugin").val();
+                var itemValue = ui.item.html();
+                //alert(urlUpdatePlugin);
+                $.ajax({
+                    type: "POST",
+                    url: urlUpdatePlugin,
+                    data: "{ plugin:'" + itemValue + "' }",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (outData) {
+                        //alert("result = " + outData.result);
+                    }
+                });
+            }
+
+            function removeItem(event, ui) {
+                var urlRemovePlugin = $("#ajaxRemovePlugin").val();
+                var itemValue = ui.item.html();
+                //alert(urlRemovePlugin);
+                $.ajax({
+                    type: "POST",
+                    url: urlRemovePlugin,
+                    data: "{ plugout:'" + itemValue + "' }",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (outData) {
+                        //alert("result = " + outData.result);
+                    }
+                });
+            }
+        });
+
+
+
+    </script>
+</head>
+
+
+<body>
+    <br />
+    <input type="hidden" id="ajaxUpdatePlugin" value='@Url.Action("UpdatePlugin", "PluginArea")' />
+    <input type="hidden" id="ajaxRemovePlugin" value='@Url.Action("RemovePlugin", "PluginArea")' />
+    <ul id="sortable1" class="connectedSortable" value ="Area" style="font-size:20px; font-weight:bold; color:darkcyan; padding-left: 1em;"; >Plugins
+        @foreach (var item in Model)
+        {
+            if (item.Buy.ToString() == "False")
+            {
+                <li class="ui-state-default" style="font-size:14px; font-weight:normal; padding-right: 0em;";>@Html.DisplayFor(modelItem => item.AreaName)</li>
+            }
+        }
+    </ul>
+
+
+    <ul id="sortable2" class="connectedSortable" value="Plugin" style="font-size:20px; font-weight:bold; color:goldenrod; padding-left: 1em;";>Buy
+        @foreach (var item in Model)
+        {
+            if (item.Buy.ToString() == "True")
+            {
+                <li class="ui-state-default" style="font-size:14px; font-weight:normal; padding-right: 0em;";>@Html.DisplayFor(modelItem => item.AreaName)</li>
+            }
+
+        }
+    </ul>
+
+
+</body>
+
+

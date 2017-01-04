@@ -1,0 +1,43 @@
+﻿@model List<ERPDomain.Entities.SH_ROLEACCESS>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.SH_ROLE.RoleName)*@
+            APP
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.A)*@
+            Allow Read
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.AllowUpdate)*@
+            Allow Update
+        </th>
+        <th></th>
+    </tr>
+
+    @*@foreach (var item in Model)*@
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        @Html.HiddenFor(modelItem => Model[i].ID)
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model[i].SH_APP.FunctionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model[i].AllowRead)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model[i].AllowUpdate)
+            </td>
+
+        </tr>
+    }
+
+
+
+</table>
+
+

@@ -1,0 +1,178 @@
+﻿
+@model ERPDomain.Models.InvoiceLineModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @if (TempData["Message"].ToString() != "")
+    {
+        <div class="Message">@TempData["Message"]</div>
+    }
+    @if (ViewBag.DeleteMessage != null)
+    {
+        <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+    }
+</div>
+
+<div id="tabs">
+
+    <ul>
+        <li><a href="#tabs-1">Invoice</a></li>
+        <li><a href="#tabs-2">Invoice Line</a></li>
+
+    </ul>
+
+    <div id="tabs-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Invoice</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Invoice.ID)
+                @*@Html.HiddenFor(model => model.Invoice.LocCode)
+                @Html.HiddenFor(model => model.Invoice.ChargeFrom)
+                @Html.HiddenFor(model => model.Invoice.FromJrnID)*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Invoice.InvoiceCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Invoice.InvoiceCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Invoice.InvoiceCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Invoice.CustomerCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Invoice.CustomerCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Invoice.CustomerCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Invoice.CustRef, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Invoice.CustRef, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Invoice.CustRef, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Invoice.InvoiceDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Invoice.InvoiceDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Invoice.InvoiceDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+
+    <div id="tabs-2">
+        <p>
+            @Html.ActionLink("Create New", "CreateInvoiceLine", new { invoiceId = Model.Invoice.ID, invoiceCode = Model.Invoice.InvoiceCode }, new { id = "lnkCreate2" })
+        </p>
+        <table class="table">
+            <tr>
+                <th>Invoice Code</th>
+                <th>InvoiceLine Code</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+                <th>AccCode</th>
+            </tr>
+            @if (Model.InvoiceLine != null)
+            {
+                foreach (var item in Model.InvoiceLine)
+                {
+                    string selectedRow = "";
+                    if (item.InvoiceID == ViewBag.invoiceId)
+                    {
+                        selectedRow = "success";
+                    }
+                    <tr class="@selectedRow">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.Invoice.InvoiceCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvoiceLineCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AccCode)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditInvoiceLine", new { invoiceId = Model.Invoice.ID, invoiceLineId = item.ID, invoiceCode = Model.Invoice.InvoiceCode, invoiceLineCode = item.InvoiceLineCode }, new { @class = "lnkEdit2" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteInvoiceLine", new { invoiceId = Model.Invoice.ID, invoiceLineId = item.ID }, new { @class = "lnkDelete2" })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+
+    </div>
+
+</div>
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

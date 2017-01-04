@@ -1,0 +1,115 @@
+﻿@model ERPDomain.Models.ChartOfAccountDimensionModel
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@*<h2>Edit</h2>*@
+
+
+
+
+
+
+<div>
+    @if (ViewBag.Message != null)
+    {
+        <div class="Message">ViewBag.Message</div>
+    }
+    @if (ViewBag.DeleteMessage != null)
+    {
+        <div class="DeleteMessage">ViewBag.DeleteMessage</div>
+    }
+</div>
+
+<div id="tabs">
+
+    <ul>
+        <li><a href="#tabs-1">ChartOfAccount</a></li>
+        <li><a href="#tabs-2">Dimension</a></li>
+    </ul>
+
+    <div id="tabs-1">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>ChartOfAccount</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ChartOfAccount.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ChartOfAccount.AccCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ChartOfAccount.AccCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChartOfAccount.AccCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ChartOfAccount.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ChartOfAccount.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChartOfAccount.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ChartOfAccount.AccType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @*@Html.DisplayFor(model => model.AccType, "" , new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ChartOfAccount.AccType, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ChartOfAccount.AccType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.AccGrpCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.AccGrpCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.AccGrpCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ChartOfAccount.AccGrpCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("AccountGroup", null, String.Empty, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ChartOfAccount.AccGrpCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+
+    </div>
+
+    <div id="tabs-2">
+        @{
+            Html.RenderAction("LoadChartOfAccountDimension", "ChartOfAccount", new { AccId = Model.ChartOfAccount.ID, AccCode = Model.ChartOfAccount.AccCode });
+        }
+    </div>
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

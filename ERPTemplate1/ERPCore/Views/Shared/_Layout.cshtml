@@ -1,0 +1,93 @@
+﻿@using ERPDomain.Entities
+@*@model IEnumerable<ParentMenu>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Prototype</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+ 
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    
+</head>
+<body class="zoomInBorder">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ERP", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            
+            <div class="navbar-collapse collapse">
+                
+                <ul class="nav navbar-nav">
+
+
+                    @{
+
+                        try
+                        {
+                            Html.RenderAction("ListMenu", "ParentMenu");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            var parentMenus = Session["ParentMenusList"] as List<ParentMenu>;
+                            if (parentMenus != null)
+                            {
+
+                                @*foreach (var pm in parentMenus)
+                                {
+                                    <li>@Html.ActionLink(pm.Name, "List", pm.ControllerName, new { Area = pm.Area }, null)</li>
+                                }
+                                <li>@Html.ActionLink("Contact", "Contact", "Home", new { Area = "" }, null);</li>*@
+
+                            }
+                            //Html.RenderAction("ListMenu", "ParentMenu");
+                            Output.WriteLine("<p>Ex=" + ex.Message + "</p>");
+                            @*@{
+                                Html.RenderAction("HttpGeneralError", "Error", new { exMessage = ex.Message });
+                            }*@
+                        }
+                    }
+                    
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    @*<div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ERP Prototype designed by iTECH WORLDWIDE SDN BHD</p>
+        </footer>
+    </div>*@
+    <div class="row panel">
+        <div id="categories" class="col-xs-3">
+            @Html.Action("LeftMenuSummary", "Nav")
+        </div>
+        <div class="col-xs-10">
+            @RenderBody()
+        </div>
+    </div>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - ERP Prototype. All Rights Reserved. designed by iTECH WORLDWIDE SDN BHD</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

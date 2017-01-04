@@ -1,0 +1,25 @@
+﻿@*@using ERPDomain.Entities
+@model IEnumerable<ParentMenu>*@
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        @*<li>@Html.ActionLink("Parent Menu", "List", "ParentMenu", new { Area = "" }, null)</li>*@
+        @*<li>@Html.ActionLink("Accounting", "Index", "Accounting", new { Area = "ERPAccounting" }, null) </li>*@
+        @*<li>@Html.ActionLink("Bill Party", "List", "BillParty", new { Area = "ERPAccounting" }, null) </li>*@
+
+
+        @*@Html.ActionLink("Main", "List", "Product")*@
+
+        @*@foreach (var menu in Model)
+        {
+            <li>@Html.ActionLink(menu.Name, "List", menu.ControllerName, new { Area = menu.Area }, null)</li>
+
+        }*@
+        @*<li>@Html.ActionLink("Bill Party 1", "List", "BillParty", new { Area = "ERPAccounting" }, null) </li>
+            <li>@Html.ActionLink("Bill Party 2", "List", "BillParty", new { Area = "" }, null) </li>
+            <li>@Html.ActionLink("Bill Party 3", "List", "BillParty", new { Area = "~/Areas/ERPAccounting" }, null) </li>*@
+
+        <li>@Html.ActionLink("Contact", "Contact", "Home", new { Area = "" }, null)</li>
+    </ul>
+</div>

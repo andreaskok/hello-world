@@ -1,0 +1,181 @@
+﻿@*@model ERPDomain.Entities.CreditNote*@
+@model ERPDomain.Models.CreditNoteLineModel
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/popupui.js"></script>
+
+<script src="~/Scripts/popupui2.js"></script>
+<script src="~/Scripts/tabui.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    })
+</script>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<h2>Create</h2>*@
+<div id="dialog-alert2" style="display: none">
+    <p>
+        @TempData["msg"]!
+    </p>
+</div>
+
+<div id="dialog-confirm2" style="display: none">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>
+</div>
+<div id="dialog-edit2" style="display: none">
+</div>
+<div id="dialog-detail2" style="display: none">
+</div>
+
+<div>
+    @*@if (TempData["Message"].ToString() != "")
+    {
+        <div class="Message">@TempData["Message"]</div>
+    }*@
+    @*@if (TempData["DeteleMessage"].ToString() != "")
+        {
+            <div class="Message">@TempData["DeteleMessage"]</div>
+        }*@
+</div>
+
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Credit Note</a></li>
+        <li><a href="#tabs-2">Credit Note Line</a></li>
+    </ul>
+
+    <div id="tabs-1">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>CreditNote</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.CreditNoteCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.CreditNoteCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.CreditNoteCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.DocType, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.DocType, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.DocType, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.TotalAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.TotalAmount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.TotalAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.Remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.Remark, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.Remark, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.CustRef, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.CustRef, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.CustRef, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.CreditNoteDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.CreditNoteDate, new { htmlAttributes = new { @class = "date-picker" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.CreditNoteDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.CreditNote.InvoiceCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CreditNote.InvoiceCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CreditNote.InvoiceCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div id="tabs-2">
+        @if (Session["CreditNoteID"] != null)
+        {
+            <p>
+                @Html.ActionLink("Create New", "CreateCreditNoteAndCreditNoteLine", null, new { id = "lnkCreate2" })
+            </p>
+
+            <table class="table">
+                <tr>
+                    <th>Credit Note Line</th>
+                </tr>
+                @if (Model.CreditNoteLine != null && Session["CreditNoteLineID"].ToString() != "")
+                {
+                    foreach (var item in Model.CreditNoteLine)
+                    {
+                        string selectedRow = "";
+                        if (item.CreditNoteID == ViewBag.creditnoteId)
+                        {
+                            selectedRow = "success";
+                        }
+                        <tr class="@selectedRow">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreditNote.CreditNoteCode)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditCreditNoteLine", new { creditnoteId = item.CreditNote.ID, creditnoteLineId = item.ID }, new { @class = "lnkEdit2" })
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        }
+    </div>
+
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

@@ -1,0 +1,194 @@
+﻿@model ERPDomain.Entities.DebitNote
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DebitNote</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DebitNoteCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebitNoteCode)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.DocType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerCode)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.LocCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccYear)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.PrintDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrintDate)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateID)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.OutstandingAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OutstandingAmount)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustRef)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.DeliveryRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryRef)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrencyOutAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrencyOutAmount)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DebitNoteDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DebitNoteDate)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.InvoiceCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvoiceCode)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
